@@ -1,0 +1,142 @@
+{
+  "id": "example-audio",
+  "brand": {
+    "name": "Example Audio",
+    "legalName": "Example Audio",
+    "tagline": "Audio profesional para negocios, instalaciones y eventos.",
+    "logo": {
+      "light": "/images/example-audio/logo-light.png",
+      "dark": "/images/example-audio/logo-dark.png"
+    },
+    "colors": {
+      "background": "#ffffff",
+      "foreground": "#0f1115",
+      "primary": "#111111",
+      "accent": "#d71920",
+      "muted": "#f4f5f6",
+      "border": "#d8dde3"
+    }
+  },
+  "seo": {
+    "title": "Example Audio | Portal B2B",
+    "description": "Portal B2B Example Audio para compra profesional con precios por cuenta, packaging industrial y presupuestos."
+  },
+  "markets": {
+    "defaultCountryCode": "es",
+    "languages": [
+      "es"
+    ],
+    "currency": "EUR"
+  },
+  "navigation": {
+    "main": [
+      {
+        "label": "Productos",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Altavoces activos",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Altavoces pasivos",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Subwoofers",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Columnas",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Accesorios",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Soluciones",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Instalaciones fijas",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Eventos en vivo",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Retail y hostelería",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Empresa",
+        "href": "/account/company",
+        "enabled": true
+      },
+      {
+        "label": "Recursos",
+        "href": "/store",
+        "enabled": true
+      },
+      {
+        "label": "Soporte",
+        "href": "/account",
+        "enabled": true
+      }
+    ]
+  },
+  "footer": {
+    "description": "Soluciones profesionales Example Audio para empresas que necesitan comprar con precisión, control y disponibilidad.",
+    "columns": [
+      {
+        "title": "Productos",
+        "links": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store"
+          }
+        ]
+      },
+      {
+        "title": "Soporte",
+        "links": [
+          {
+            "label": "Contacto",
+            "href": "/contact"
+          }
+        ]
+      }
+    ]
+  },
+  "fallbacks": {
+    "productCategoryLabel": "Equipo de audio profesional",
+    "productTechnicalDescription": "Equipo de audio profesional para canal B2B.",
+    "productBrandKeywords": [
+      "audio",
+      "altavoz",
+      "sonido",
+      "instalacion"
+    ]
+  }
+}

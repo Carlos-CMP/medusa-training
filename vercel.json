@@ -1,0 +1,22 @@
+{
+  "installCommand": "npm install --legacy-peer-deps",
+  "buildCommand": "npm run build",
+  "env": {
+    "NEXT_PUBLIC_MEDUSA_BACKEND_URL": "https://b2b-novicell.medusajs.app",
+    "NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY": "pk_0536dc80e94c83135dfbbfdc88d5033872bb660af8dc46b80f4c183816a58766",
+    "NEXT_PUBLIC_DEFAULT_REGION": "es",
+    "NEXT_PUBLIC_SUPPORTED_COUNTRY_CODES": "es,fr,de,dk,se,gb,it",
+    "NEXT_PUBLIC_MEDUSA_PAYMENTS_PUBLISHABLE_KEY": "",
+    "NEXT_PUBLIC_MEDUSA_PAYMENTS_ACCOUNT_ID": ""
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_MEDUSA_BACKEND_URL": "https://b2b-novicell.medusajs.app",
+      "NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY": "pk_0536dc80e94c83135dfbbfdc88d5033872bb660af8dc46b80f4c183816a58766",
+      "NEXT_PUBLIC_DEFAULT_REGION": "es",
+      "NEXT_PUBLIC_SUPPORTED_COUNTRY_CODES": "es,fr,de,dk,se,gb,it",
+      "NEXT_PUBLIC_MEDUSA_PAYMENTS_PUBLISHABLE_KEY": "",
+      "NEXT_PUBLIC_MEDUSA_PAYMENTS_ACCOUNT_ID": ""
+    }
+  }
+}

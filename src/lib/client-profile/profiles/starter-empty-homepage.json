@@ -1,0 +1,149 @@
+{
+  "heroBadgePrimary": "B2B Industrial Starter",
+  "heroBadgeSecondary": "Compra industrial",
+  "heroTitle": "Compra profesional B2B Industrial Starter con reglas reales de empresa.",
+  "heroBody": "Catálogo, packaging, presupuestos y aprobaciones en una experiencia preparada para operaciones B2B.",
+  "primaryCtaLabel": "Explorar catálogo",
+  "primaryCtaHref": "/store",
+  "secondaryCtaLabel": "Solicitar asesoramiento",
+  "secondaryCtaHref": "/account",
+  "heroImage": "/images/starter-empty/home-hero.svg",
+  "heroImageAlt": "Producto profesional B2B Industrial Starter en contexto B2B",
+  "heroImageEyebrow": "Gama profesional",
+  "heroImageTitle": "Soluciones para empresas que compran con precisión.",
+  "metrics": [
+    {
+      "value": "24/48h",
+      "label": "entrega ágil según stock"
+    },
+    {
+      "value": "B2B",
+      "label": "precios por cuenta"
+    },
+    {
+      "value": "Medusa",
+      "label": "catálogo conectado"
+    }
+  ],
+  "trustBlocks": [
+    {
+      "title": "Compra por caja",
+      "body": "Mínimos, múltiplos y pallets",
+      "image": ""
+    },
+    {
+      "title": "Precios B2B",
+      "body": "Tarifas por cuenta y volumen",
+      "image": ""
+    },
+    {
+      "title": "Presupuestos",
+      "body": "Negociacion comercial integrada",
+      "image": ""
+    },
+    {
+      "title": "Aprobaciones",
+      "body": "Control de compras por empresa",
+      "image": ""
+    }
+  ],
+  "capabilityEyebrow": "Soluciones por operativa",
+  "capabilityTitle": "Un portal preparado para compras recurrentes, stock y control comercial.",
+  "capabilityBlocks": [
+    {
+      "title": "Distribución",
+      "body": "Catálogo con unidades de venta, descuentos y disponibilidad.",
+      "image": "/images/starter-empty/home-detail.svg"
+    },
+    {
+      "title": "Compras corporativas",
+      "body": "Usuarios, permisos y aprobaciones por empresa.",
+      "image": "/images/starter-empty/home-detail.svg"
+    },
+    {
+      "title": "Operación conectada",
+      "body": "Base lista para integrar ERP, PIM, stock y facturacion.",
+      "image": "/images/starter-empty/home-detail.svg"
+    }
+  ],
+  "categoryEyebrow": "Categorías",
+  "categoryTitle": "Categorías destacadas",
+  "featuredCategories": [
+    {
+      "title": "Consumibles",
+      "handle": "consumibles",
+      "image": "/images/starter-empty/category-placeholder.svg"
+    },
+    {
+      "title": "Repuestos",
+      "handle": "repuestos",
+      "image": "/images/starter-empty/category-placeholder.svg"
+    },
+    {
+      "title": "Herramientas",
+      "handle": "herramientas",
+      "image": "/images/starter-empty/category-placeholder.svg"
+    },
+    {
+      "title": "Proteccion",
+      "handle": "proteccion",
+      "image": "/images/starter-empty/category-placeholder.svg"
+    },
+    {
+      "title": "Accesorios",
+      "handle": "accesorios",
+      "image": "/images/starter-empty/category-placeholder.svg"
+    }
+  ],
+  "detailEyebrow": "Soluciones para cada negocio",
+  "detailTitle": "Una experiencia B2B clara para comprar mejor.",
+  "detailBody": "Desde el catálogo hasta el presupuesto, el flujo está preparado para compradores profesionales.",
+  "detailCtaLabel": "Descubrir soluciones",
+  "detailCtaHref": "/store",
+  "detailImage": "/images/starter-empty/home-detail.svg",
+  "detailImageAlt": "Solución profesional del cliente",
+  "detailBlocks": [
+    {
+      "title": "Surtido",
+      "body": "Productos, variantes e imágenes listas para consulta profesional.",
+      "image": "/images/starter-empty/home-detail.svg"
+    },
+    {
+      "title": "Packaging",
+      "body": "Compra por unidad, caja o multiples según regla de variante.",
+      "image": "/images/starter-empty/home-detail.svg"
+    },
+    {
+      "title": "Stock",
+      "body": "Disponibilidad y plazos visibles antes de pedir.",
+      "image": "/images/starter-empty/home-detail.svg"
+    },
+    {
+      "title": "Control",
+      "body": "Presupuestos, aprobaciones y permisos de compra.",
+      "image": "/images/starter-empty/home-detail.svg"
+    }
+  ],
+  "catalogEyebrow": "Catálogo conectado",
+  "catalogTitle": "Productos destacados",
+  "productFallbackImages": [
+    "/images/starter-empty/product-placeholder.svg",
+    "/images/starter-empty/product-placeholder.svg",
+    "/images/starter-empty/product-placeholder.svg",
+    "/images/starter-empty/product-placeholder.svg",
+    "/images/starter-empty/product-placeholder.svg"
+  ],
+  "emptyCatalogMessage": "Cuando el backend Medusa devuelva productos para esta región, aparecerán con imagen, precio calculado y enlace a PDP.",
+  "commercialCtaTitle": "¿Te ayudamos a encontrar la solución perfecta?",
+  "commercialCtaBody": "Habla con el equipo comercial y recibe asesoramiento personalizado.",
+  "commercialCtaLabel": "Contactar",
+  "commercialCtaHref": "/account",
+  "operationsEyebrow": "Operativa B2B",
+  "operationsTitle": "Lo que el backoffice aporta",
+  "operations": [
+    "Empresas, empleados y permisos de compra desde Admin.",
+    "Presupuestos negociables que nacen desde el carrito.",
+    "Aprobaciones por importe antes de confirmar pedidos.",
+    "Base preparada para integrar ERP, PIM, stock e invoices."
+  ]
+}

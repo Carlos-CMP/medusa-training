@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title">
+  <title id="title">Industrial B2B placeholder</title>
+  <rect width="1600" height="900" fill="#111111"/>
+  <rect x="940" y="160" width="360" height="520" rx="8" fill="#2f343b"/>
+  <rect x="1010" y="230" width="220" height="220" rx="8" fill="#0f1115"/>
+  <circle cx="1120" cy="340" r="76" fill="#d71920"/>
+  <circle cx="1120" cy="340" r="42" fill="#111111"/>
+  <rect x="760" y="320" width="300" height="360" rx="8" fill="#424852"/>
+  <circle cx="910" cy="460" r="86" fill="#171a1f"/>
+  <path d="M0 0h860v900H0z" fill="#050505"/>
+  <path d="M700 0h360L520 900H160z" fill="#1f2937" opacity=".55"/>
+  <path d="M1040 760h360" stroke="#d71920" stroke-width="8"/>
+</svg>

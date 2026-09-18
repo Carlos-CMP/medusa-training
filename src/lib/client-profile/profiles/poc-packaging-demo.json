@@ -1,0 +1,147 @@
+{
+  "id": "poc-packaging-demo",
+  "brand": {
+    "name": "POC Packaging Demo",
+    "legalName": "POC Packaging Demo",
+    "tagline": "Embalaje y packaging para operaciones que no pueden parar.",
+    "logo": {
+      "light": "/images/poc-packaging-demo/logo-light.png",
+      "dark": "/images/poc-packaging-demo/logo-dark.png"
+    },
+    "colors": {
+      "background": "#ffffff",
+      "foreground": "#0f1115",
+      "primary": "#111111",
+      "accent": "#d71920",
+      "muted": "#f4f5f6",
+      "border": "#d8dde3"
+    }
+  },
+  "seo": {
+    "title": "POC Packaging Demo | Portal B2B",
+    "description": "Portal B2B POC Packaging Demo para compra profesional con precios por cuenta, packaging industrial y presupuestos."
+  },
+  "markets": {
+    "defaultCountryCode": "es",
+    "languages": [
+      "es"
+    ],
+    "currency": "EUR"
+  },
+  "navigation": {
+    "main": [
+      {
+        "label": "Productos",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Cajas",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Sobres",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Proteccion",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Etiquetas",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Precintos",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Soluciones",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Ecommerce",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Logística",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Almac?n",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Retail",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Empresa",
+        "href": "/account/company",
+        "enabled": true
+      },
+      {
+        "label": "Recursos",
+        "href": "/store",
+        "enabled": true
+      },
+      {
+        "label": "Soporte",
+        "href": "/account",
+        "enabled": true
+      }
+    ]
+  },
+  "footer": {
+    "description": "Soluciones profesionales POC Packaging Demo para empresas que necesitan comprar con precisión, control y disponibilidad.",
+    "columns": [
+      {
+        "title": "Productos",
+        "links": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store"
+          }
+        ]
+      },
+      {
+        "title": "Soporte",
+        "links": [
+          {
+            "label": "Contacto",
+            "href": "/contact"
+          }
+        ]
+      }
+    ]
+  },
+  "fallbacks": {
+    "productCategoryLabel": "Producto de packaging profesional",
+    "productTechnicalDescription": "Producto de packaging profesional para canal B2B.",
+    "productBrandKeywords": [
+      "packaging",
+      "embalaje",
+      "caja",
+      "sobre"
+    ]
+  }
+}

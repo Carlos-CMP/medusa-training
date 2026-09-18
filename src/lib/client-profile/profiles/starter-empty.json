@@ -1,0 +1,141 @@
+{
+  "id": "starter-empty",
+  "brand": {
+    "name": "B2B Industrial Starter",
+    "legalName": "B2B Industrial Starter",
+    "tagline": "Base ecommerce B2B industrial lista para adaptar",
+    "logo": {
+      "light": "/images/starter-empty/logo-light.svg",
+      "dark": "/images/starter-empty/logo-dark.svg"
+    },
+    "colors": {
+      "background": "#ffffff",
+      "foreground": "#0f1115",
+      "primary": "#111111",
+      "accent": "#d71920",
+      "muted": "#f4f5f6",
+      "border": "#d8dde3"
+    }
+  },
+  "seo": {
+    "title": "B2B Industrial Starter | Portal B2B",
+    "description": "Portal B2B B2B Industrial Starter para compra profesional con precios por cuenta, packaging industrial y presupuestos."
+  },
+  "markets": {
+    "defaultCountryCode": "es",
+    "languages": [
+      "es"
+    ],
+    "currency": "EUR"
+  },
+  "navigation": {
+    "main": [
+      {
+        "label": "Productos",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Consumibles",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Repuestos",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Herramientas",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Proteccion",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Accesorios",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Soluciones",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Compras recurrentes",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Packaging industrial",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Presupuestos y aprobaciones",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Empresa",
+        "href": "/account/company",
+        "enabled": true
+      },
+      {
+        "label": "Recursos",
+        "href": "/store",
+        "enabled": true
+      },
+      {
+        "label": "Soporte",
+        "href": "/account",
+        "enabled": true
+      }
+    ]
+  },
+  "footer": {
+    "description": "Soluciones profesionales B2B Industrial Starter para empresas que necesitan comprar con precisión, control y disponibilidad.",
+    "columns": [
+      {
+        "title": "Productos",
+        "links": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store"
+          }
+        ]
+      },
+      {
+        "title": "Soporte",
+        "links": [
+          {
+            "label": "Contacto",
+            "href": "/contact"
+          }
+        ]
+      }
+    ]
+  },
+  "fallbacks": {
+    "productCategoryLabel": "Producto profesional",
+    "productTechnicalDescription": "Producto profesional para canal B2B.",
+    "productBrandKeywords": [
+      "industrial",
+      "profesional",
+      "b2b"
+    ]
+  }
+}

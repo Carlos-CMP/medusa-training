@@ -1,0 +1,185 @@
+{
+  "id": "example-industrial",
+  "brand": {
+    "name": "Industrex",
+    "legalName": "Industrex Supply S.L.",
+    "tagline": "Suministro industrial para equipos que no paran.",
+    "logo": {
+      "light": "/images/example-industrial/logo-light.png",
+      "dark": "/images/example-industrial/logo-dark.png"
+    },
+    "colors": {
+      "background": "#ffffff",
+      "foreground": "#111111",
+      "primary": "#111111",
+      "accent": "#d71920",
+      "muted": "#f4f5f6",
+      "border": "#d8dde3"
+    }
+  },
+  "seo": {
+    "title": "Industrex | Portal B2B industrial",
+    "description": "Portal B2B para compra industrial con precios por cuenta, packaging por caja, presupuestos y aprobaciones."
+  },
+  "markets": {
+    "defaultCountryCode": "es",
+    "languages": [
+      "es"
+    ],
+    "currency": "EUR"
+  },
+  "navigation": {
+    "main": [
+      {
+        "label": "Productos",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Consumibles",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Repuestos",
+            "href": "/store",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Soluciones",
+        "href": "/store",
+        "enabled": true,
+        "children": [
+          {
+            "label": "Reposicion recurrente",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Logística por pallet",
+            "href": "/store",
+            "enabled": true
+          },
+          {
+            "label": "Compras con aprobaciones",
+            "href": "/account/approvals",
+            "enabled": true
+          }
+        ]
+      },
+      {
+        "label": "Empresa",
+        "href": "/account/company",
+        "enabled": true
+      },
+      {
+        "label": "Recursos",
+        "href": "/store",
+        "enabled": true
+      },
+      {
+        "label": "Soporte",
+        "href": "/account",
+        "enabled": true
+      }
+    ]
+  },
+  "footer": {
+    "description": "Suministros industriales para empresas que necesitan comprar con precisión, control y disponibilidad.",
+    "columns": [
+      {
+        "title": "Productos",
+        "links": [
+          {
+            "label": "Catálogo completo",
+            "href": "/store"
+          },
+          {
+            "label": "Consumibles",
+            "href": "/store"
+          },
+          {
+            "label": "Repuestos",
+            "href": "/store"
+          }
+        ]
+      },
+      {
+        "title": "Operativa B2B",
+        "links": [
+          {
+            "label": "Presupuestos",
+            "href": "/account/quotes"
+          },
+          {
+            "label": "Aprobaciones",
+            "href": "/account/approvals"
+          },
+          {
+            "label": "Empresa",
+            "href": "/account/company"
+          }
+        ]
+      }
+    ]
+  },
+  "fallbacks": {
+    "productCategoryLabel": "Producto industrial",
+    "productTechnicalDescription": "Producto profesional para compras B2B industriales.",
+    "productBrandKeywords": [
+      "industrial",
+      "repuesto",
+      "consumible",
+      "herramienta"
+    ]
+  },
+  "productPage": {
+    "benefits": [
+      {
+        "label": "Tarifas por cuenta y volumen"
+      },
+      {
+        "label": "Stock y embalaje por variante"
+      },
+      {
+        "label": "Soporte técnico para compras"
+      },
+      {
+        "label": "Control de presupuesto y aprobaciones"
+      }
+    ],
+    "supportPanels": [
+      {
+        "title": "Reposicion recurrente",
+        "body": "Pedidos por caja, mínimos y múltiplos pensados para compras industriales.",
+        "action": "Ver catálogo",
+        "href": "/store"
+      },
+      {
+        "title": "Logística por pallet",
+        "body": "Packaging, peso y dimensiones preparados para planificar recepcion y transporte.",
+        "action": "Más info",
+        "href": "/store"
+      },
+      {
+        "title": "Compras con control",
+        "body": "Presupuestos, aprobaciones y roles de empresa para equipos de compra.",
+        "action": "Ver empresa",
+        "href": "/account/company"
+      },
+      {
+        "title": "Soporte comercial",
+        "body": "Asistencia para equivalencias, cantidades y condiciones por cuenta.",
+        "action": "Contactar",
+        "href": "/account"
+      }
+    ]
+  }
+}
