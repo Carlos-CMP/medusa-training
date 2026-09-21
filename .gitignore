@@ -41,6 +41,17 @@ yarn-error.log*
 
 # cloudflare / wrangler
 .wrangler
+.open-next
+
+# webflow cloud build artifacts (regenerated on every `apps deploy`)
+.tmp
+next.config.ts
+next.config.webflow.ts
+clouduser.next.config.d.ts
+package-lock.json
+
+# pastiche memory
+.pastiche
 
 # typescript
 *.tsbuildinfo
