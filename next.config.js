@@ -22,7 +22,10 @@ const nextConfig = {
     },
   },
   images: {
-    unoptimized: true,
+    // Webflow Cloud sets a custom `loader` (webflow-loader.ts) that replaces
+    // Next's whole optimization pipeline, including basePath prefixing for
+    // local assets. `unoptimized: true` was skipping that loader entirely,
+    // which is why local images 404'd without the `/tienda` prefix.
     remotePatterns: [
       {
         protocol: "http",
