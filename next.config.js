@@ -1,6 +1,12 @@
 const checkEnvVariables = require("./check-env-variables")
 
-checkEnvVariables()
+// Webflow Cloud's image loader (webflow-loader.ts) imports this config file,
+// which pulls this module into the client bundle too. Only run the Node-only
+// env check when actually building/running in Node, not when this file's
+// side effects get re-executed in the browser.
+if (typeof window === "undefined") {
+  checkEnvVariables()
+}
 
 /**
  * @type {import('next').NextConfig}
