@@ -60,7 +60,9 @@ export const getCacheOptions = async (
  * knowing every visitor's `_medusa_cache_id`. Per-visitor data (cart,
  * customer) must keep using getCacheOptions.
  */
-export const getGlobalCacheOptions = (tag: string): { tags: string[] } => ({
+export const getGlobalCacheOptions = async (
+  tag: string
+): Promise<{ tags: string[] }> => ({
   tags: [tag],
 })
 

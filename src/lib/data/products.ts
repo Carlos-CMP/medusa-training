@@ -30,7 +30,7 @@ export const getProductsById = async ({
   const headers = {
     ...(await getAuthHeaders()),
   }
-  const next = getGlobalCacheOptions("products")
+  const next = await getGlobalCacheOptions("products")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[] }>(`/store/products`, {
@@ -52,7 +52,7 @@ export const getProductByHandle = async (handle: string, regionId: string) => {
   const headers = {
     ...(await getAuthHeaders()),
   }
-  const next = getGlobalCacheOptions("products")
+  const next = await getGlobalCacheOptions("products")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[] }>(`/store/products`, {
@@ -116,7 +116,7 @@ export const listProducts = async ({
   const headers = {
     ...(await getAuthHeaders()),
   }
-  const next = getGlobalCacheOptions("products")
+  const next = await getGlobalCacheOptions("products")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
