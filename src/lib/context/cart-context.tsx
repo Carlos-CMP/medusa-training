@@ -7,6 +7,7 @@ import {
   updateLineItem,
 } from "@/lib/data/cart"
 import { addToCartEventBus } from "@/lib/data/cart-event-bus"
+import { describeStorefrontError } from "@/lib/util/describe-storefront-error"
 import { ApprovalStatusType } from "@/types/approval"
 import { B2BCart } from "@/types/global"
 import type {
@@ -177,11 +178,14 @@ export function CartProvider({
           })),
           countryCode: countryCode as string,
         }).catch((e) => {
-          if (e.message === "Cart is pending approval") {
-            toast.error("El carrito está bloqueado por aprobación.")
-          } else {
-            toast.error("No se ha podido añadir al carrito")
-          }
+          const message =
+            e instanceof Error && e.message === "Cart is pending approval"
+              ? "El carrito está bloqueado por aprobación."
+              : describeStorefrontError(e, "cart:add-to-cart", {
+                  unauthorized: "Inicia sesión para añadir productos al carrito.",
+                })
+
+          toast.error(message)
           setOptimisticCart(prevCart)
         })
       })
@@ -224,7 +228,7 @@ export function CartProvider({
     setIsUpdatingCart(true)
 
     await deleteLineItem(lineItem).catch((e) => {
-      toast.error("No se ha podido eliminar la línea")
+      toast.error(describeStorefrontError(e, "cart:delete-line-item"))
       setOptimisticCart(prevCart)
     })
   }
@@ -287,14 +291,9 @@ export function CartProvider({
         lineId: lineItem,
         data: { quantity, metadata },
       }).catch((e) => {
-        const error =
-          e instanceof Error
-            ? e
-            : new Error("No se ha podido actualizar la cantidad")
-
-        toast.error("No se ha podido actualizar la cantidad")
+        toast.error(describeStorefrontError(e, "cart:update-quantity"))
         setOptimisticCart(prevCart)
-        throw error
+        throw e instanceof Error ? e : new Error(String(e))
       })
     }
   }
@@ -312,7 +311,7 @@ export function CartProvider({
     setIsUpdatingCart(true)
 
     await emptyCart().catch((e) => {
-      toast.error("No se ha podido vaciar el carrito")
+      toast.error(describeStorefrontError(e, "cart:empty-cart"))
       setOptimisticCart(prevCart)
     })
   }

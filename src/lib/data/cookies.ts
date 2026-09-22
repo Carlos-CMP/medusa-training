@@ -52,6 +52,18 @@ export const getCacheOptions = async (
   return { tags: [`${cacheTag}`] }
 }
 
+/**
+ * Unlike getCacheOptions, this is NOT scoped to a visitor session — it's
+ * the same tag for every request. Use it for data that doesn't vary by
+ * visitor (the product catalog), where a backend webhook needs to be able
+ * to invalidate a single, well-known tag on `product.updated` without
+ * knowing every visitor's `_medusa_cache_id`. Per-visitor data (cart,
+ * customer) must keep using getCacheOptions.
+ */
+export const getGlobalCacheOptions = (tag: string): { tags: string[] } => ({
+  tags: [tag],
+})
+
 export const setAuthToken = async (token: string) => {
   const cookies = await nextCookies()
 

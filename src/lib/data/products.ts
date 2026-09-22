@@ -5,7 +5,7 @@ import {
   applyCatalogRulesToProduct,
   applyCatalogRulesToProducts,
 } from "@/lib/data/catalog-rules"
-import { getAuthHeaders } from "@/lib/data/cookies"
+import { getAuthHeaders, getGlobalCacheOptions } from "@/lib/data/cookies"
 import { getRegion } from "@/lib/data/regions"
 import { sortProducts } from "@/lib/util/sort-products"
 import { SortOptions } from "@/modules/store/components/refinement-list/sort-products"
@@ -30,12 +30,12 @@ export const getProductsById = async ({
   const headers = {
     ...(await getAuthHeaders()),
   }
+  const next = getGlobalCacheOptions("products")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[] }>(`/store/products`, {
       credentials: "include",
       method: "GET",
-      cache: "no-store",
       query: {
         id: ids,
         region_id: regionId,
@@ -43,6 +43,7 @@ export const getProductsById = async ({
           "*variants,*variants.calculated_price,*variants.inventory_quantity",
       },
       headers,
+      next,
     })
     .then(({ products }) => products)
 }
@@ -51,12 +52,12 @@ export const getProductByHandle = async (handle: string, regionId: string) => {
   const headers = {
     ...(await getAuthHeaders()),
   }
+  const next = getGlobalCacheOptions("products")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[] }>(`/store/products`, {
       credentials: "include",
       method: "GET",
-      cache: "no-store",
       query: {
         handle,
         region_id: regionId,
@@ -64,6 +65,7 @@ export const getProductByHandle = async (handle: string, regionId: string) => {
           "*variants.calculated_price,+variants.inventory_quantity,+metadata,+tags,*categories,*collection",
       },
       headers,
+      next,
     })
     .then(async ({ products }) => {
       const product = products[0]
@@ -114,6 +116,7 @@ export const listProducts = async ({
   const headers = {
     ...(await getAuthHeaders()),
   }
+  const next = getGlobalCacheOptions("products")
 
   return sdk.client
     .fetch<{ products: HttpTypes.StoreProduct[]; count: number }>(
@@ -121,7 +124,6 @@ export const listProducts = async ({
       {
         credentials: "include",
         method: "GET",
-        cache: "no-store",
         query: {
           limit,
           offset,
@@ -131,6 +133,7 @@ export const listProducts = async ({
           ...queryParams,
         },
         headers,
+        next,
       }
     )
     .then(async ({ products, count }) => {

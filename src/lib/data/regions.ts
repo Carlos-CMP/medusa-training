@@ -1,7 +1,7 @@
 "use server"
 
 import { sdk } from "@/lib/config"
-import medusaError from "@/lib/util/medusa-error"
+import handleMedusaError from "@/lib/util/handle-medusa-error"
 import { HttpTypes } from "@medusajs/types"
 import { getCacheOptions } from "./cookies"
 
@@ -16,7 +16,7 @@ export const listRegions = async (): Promise<HttpTypes.StoreRegion[]> => {
       next,
     })
     .then(({ regions }: { regions: HttpTypes.StoreRegion[] }) => regions)
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export const retrieveRegion = async (
@@ -32,34 +32,33 @@ export const retrieveRegion = async (
       next,
     })
     .then(({ region }: { region: HttpTypes.StoreRegion }) => region)
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
-const regionMap = new Map<string, HttpTypes.StoreRegion>()
-
+// Previously cached regions in a module-level Map that lived for the whole
+// process and never respected revalidateTag. listRegions() is already
+// cached by Next.js (tag-based, via getCacheOptions), so a cache hit here
+// costs no network round-trip and does respect revalidation.
 export const getRegion = async (
   countryCode: string
 ): Promise<HttpTypes.StoreRegion | null> => {
   try {
-    if (regionMap.has(countryCode)) {
-      return regionMap.get(countryCode) ?? null
-    }
-
     const regions = await listRegions()
 
     if (!regions) {
       return null
     }
 
+    const regionByCountryCode = new Map<string, HttpTypes.StoreRegion>()
     regions.forEach((region) => {
       region.countries?.forEach((c) => {
-        regionMap.set(c?.iso_2 ?? "", region)
+        regionByCountryCode.set(c?.iso_2 ?? "", region)
       })
     })
 
     const region = countryCode
-      ? regionMap.get(countryCode)
-      : regionMap.get("us")
+      ? regionByCountryCode.get(countryCode)
+      : regionByCountryCode.get("us")
 
     return region ?? null
   } catch (e: any) {

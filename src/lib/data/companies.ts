@@ -1,7 +1,7 @@
 "use server"
 
 import { sdk } from "@/lib/config"
-import medusaError from "@/lib/util/medusa-error"
+import handleMedusaError from "@/lib/util/handle-medusa-error"
 import {
   getAuthHeaders,
   getCacheOptions,
@@ -148,7 +148,7 @@ export const inviteEmployee = async (data: StoreInviteEmployee) => {
       body: inviteData,
       headers,
     }
-  ).catch(medusaError)
+  ).catch(handleMedusaError)
 
   trackSafely("employee_invited", {
     employee_id: employee.employee.id,

@@ -1,7 +1,8 @@
 "use server"
 
 import { sdk } from "@/lib/config"
-import medusaError from "@/lib/util/medusa-error"
+import handleMedusaError from "@/lib/util/handle-medusa-error"
+import { withRetry } from "@/lib/util/with-retry"
 import { StoreApprovalResponse } from "@/types/approval"
 import { B2BCart } from "@/types/global"
 import { HttpTypes, StoreCart } from "@medusajs/types"
@@ -119,8 +120,9 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
     ...(await getAuthHeaders()),
   }
 
-  return sdk.store.cart
-    .update(cartId, data, {}, headers)
+  // Safe to retry: sets fields (region_id, addresses, promo_codes) to an
+  // absolute value, not additive — repeating it doesn't duplicate anything.
+  return withRetry(() => sdk.store.cart.update(cartId, data, {}, headers))
     .then(async ({ cart }) => {
       const fullfillmentCacheTag = await getCacheTag("fulfillment")
       revalidateTag(fullfillmentCacheTag)
@@ -128,7 +130,7 @@ export async function updateCart(data: HttpTypes.StoreUpdateCart) {
       revalidateTag(cartCacheTag)
       return cart
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function addToCart({
@@ -155,6 +157,10 @@ export async function addToCart({
     ...(await getAuthHeaders()),
   }
 
+  // Not wrapped in withRetry: Medusa merges quantity into an existing line
+  // item for the same variant, so this is additive, not idempotent. If the
+  // create actually succeeded and only the response was lost, a retry
+  // would add the quantity a second time.
   await sdk.store.cart
     .createLineItem(
       cart.id,
@@ -171,7 +177,7 @@ export async function addToCart({
       const cartCacheTag = await getCacheTag("carts")
       revalidateTag(cartCacheTag)
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function addToCartBulk({
@@ -211,7 +217,7 @@ export async function addToCartBulk({
       const cartCacheTag = await getCacheTag("carts")
       revalidateTag(cartCacheTag)
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function updateLineItem({
@@ -237,19 +243,21 @@ export async function updateLineItem({
     ...(await getAuthHeaders()),
   }
 
-  await sdk.client
-    .fetch(`/store/carts/${cartId}/line-items/${lineId}/b2b`, {
+  // Safe to retry: sets quantity to an absolute value, not additive.
+  await withRetry(() =>
+    sdk.client.fetch(`/store/carts/${cartId}/line-items/${lineId}/b2b`, {
       method: "POST",
       headers,
       body: data,
     })
+  )
     .then(async () => {
       const fullfillmentCacheTag = await getCacheTag("fulfillment")
       revalidateTag(fullfillmentCacheTag)
       const cartCacheTag = await getCacheTag("carts")
       revalidateTag(cartCacheTag)
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function deleteLineItem(lineId: string) {
@@ -268,15 +276,16 @@ export async function deleteLineItem(lineId: string) {
     ...(await getAuthHeaders()),
   }
 
-  await sdk.store.cart
-    .deleteLineItem(cartId, lineId, {}, headers)
+  // Safe to retry: deleting an already-deleted line item is a no-op, not
+  // a duplicate side effect.
+  await withRetry(() => sdk.store.cart.deleteLineItem(cartId, lineId, {}, headers))
     .then(async () => {
       const fullfillmentCacheTag = await getCacheTag("fulfillment")
       revalidateTag(fullfillmentCacheTag)
       const cartCacheTag = await getCacheTag("carts")
       revalidateTag(cartCacheTag)
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function emptyCart() {
@@ -308,13 +317,20 @@ export async function setShippingMethod({
     ...(await getAuthHeaders()),
   }
 
-  return sdk.store.cart
-    .addShippingMethod(cartId, { option_id: shippingMethodId }, {}, headers)
+  // Safe to retry: sets the shipping method, replacing any previous one.
+  return withRetry(() =>
+    sdk.store.cart.addShippingMethod(
+      cartId,
+      { option_id: shippingMethodId },
+      {},
+      headers
+    )
+  )
     .then(async () => {
       const cartCacheTag = await getCacheTag("carts")
       revalidateTag(cartCacheTag)
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function initiatePaymentSession(
@@ -330,6 +346,9 @@ export async function initiatePaymentSession(
     ...(await getAuthHeaders()),
   }
 
+  // Never retried: creates a payment session with the external provider.
+  // A retry after a lost response could create a second session/intent —
+  // not verified idempotent against every configured provider.
   return sdk.store.payment
     .initiatePaymentSession(cart as StoreCart, data, {}, headers)
     .then(async (resp) => {
@@ -337,7 +356,7 @@ export async function initiatePaymentSession(
       revalidateTag(cartCacheTag)
       return resp
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function applyPromotions(codes: string[]) {
@@ -355,7 +374,7 @@ export async function applyPromotions(codes: string[]) {
       const fullfillmentCacheTag = await getCacheTag("fulfillment")
       revalidateTag(fullfillmentCacheTag)
     })
-    .catch(medusaError)
+    .catch(handleMedusaError)
 }
 
 export async function applyGiftCard(code: string) {
@@ -529,9 +548,12 @@ export async function placeOrder(
   const ordersTag = await getCacheTag("orders")
   const approvalsTag = await getCacheTag("approvals")
 
+  // Never retried: captures payment and creates the order. This is exactly
+  // the case Fase 9 forbids auto-retrying without verified idempotency —
+  // a duplicate call here means a duplicate charge or a duplicate order.
   const response = await sdk.store.cart
     .complete(id, {}, headers)
-    .catch(medusaError)
+    .catch(handleMedusaError)
 
   if (response.type === "cart") {
     return response
@@ -578,8 +600,8 @@ export async function updateRegion(countryCode: string, currentPath: string) {
   const regionCacheTag = await getCacheTag("regions")
   revalidateTag(regionCacheTag)
 
-  const productsCacheTag = await getCacheTag("products")
-  revalidateTag(productsCacheTag)
+  // "products" is a global (non-visitor-scoped) tag — see getGlobalCacheOptions.
+  revalidateTag("products")
 
   redirect(`/${countryCode}${currentPath}`)
 }
@@ -592,20 +614,15 @@ export async function createCartApproval(cartId: string, createdBy: string) {
     ...(await getAuthHeaders()),
   }
 
+  // Not wrapped in withRetry: creates a new approval request, not
+  // verified idempotent against a duplicate call.
   const response = await sdk.client
     .fetch<StoreApprovalResponse & { approvals?: StoreApprovalResponse["approval"][] }>(`/store/carts/${cartId}/approvals`, {
       method: "POST",
       headers,
       credentials: "include",
     })
-    .catch((err) => {
-      if (err.response?.json) {
-        return err.response.json().then((body: any) => {
-          throw new Error(body.message || err.message)
-        })
-      }
-      throw err
-    })
+    .catch(handleMedusaError)
 
   const cartCacheTag = await getCacheTag("carts")
   revalidateTag(cartCacheTag)

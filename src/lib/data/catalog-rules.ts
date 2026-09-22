@@ -64,7 +64,18 @@ export const getApplicableCatalogRules = async ({
       next,
     })
     .then(({ applicable_rules }) => applicable_rules || [])
-    .catch(() => [])
+    .catch((error) => {
+      // Fail-open by design (a product shows as if unrestricted rather
+      // than disappearing), but that must be a visible, logged decision —
+      // not indistinguishable from "no rules apply". A silent 500 here
+      // would mean B2B pricing/visibility rules stop applying with zero
+      // trace. See docs/hallazgos-frontend-backend.md, "Performance".
+      console.error(
+        `Catalog rules request failed for product ${productId ?? "unknown"}, falling back to no rules applied`,
+        error
+      )
+      return []
+    })
 }
 
 const summarizeRules = (rules: StoreCatalogRule[]): CatalogRuleSummary => {
@@ -103,7 +114,11 @@ export const applyCatalogRulesToProducts = async ({
   categoryId?: string
   collectionId?: string
 }) => {
-  const enriched = await Promise.all(
+  // getApplicableCatalogRules never rejects (it catches its own errors and
+  // falls back to []), but Promise.allSettled is kept here as defense in
+  // depth: one product's lookup failing must never take down the rest of
+  // the page, even if that guarantee changes upstream later.
+  const settled = await Promise.allSettled(
     products.map(async (product) => {
       const rules = await getApplicableCatalogRules({
         productId: product.id,
@@ -116,6 +131,18 @@ export const applyCatalogRulesToProducts = async ({
       return withCatalogRuleSummary(product, summarizeRules(rules))
     })
   )
+
+  const enriched = settled.map((result, index) => {
+    if (result.status === "fulfilled") {
+      return result.value
+    }
+
+    console.error(
+      `Unexpected catalog rules failure for product ${products[index].id}, showing it unrestricted`,
+      result.reason
+    )
+    return withCatalogRuleSummary(products[index], summarizeRules([]))
+  })
 
   return enriched.filter((product) => {
     const summary = product.metadata

@@ -1,7 +1,7 @@
 "use server"
 
 import { sdk } from "@/lib/config"
-import medusaError from "@/lib/util/medusa-error"
+import handleMedusaError from "@/lib/util/handle-medusa-error"
 import { B2BCustomer } from "@/types/global"
 import { HttpTypes } from "@medusajs/types"
 import { track } from "@vercel/analytics/server"
@@ -54,7 +54,7 @@ export const updateCustomer = async (body: HttpTypes.StoreUpdateCustomer) => {
   const updateRes = await sdk.store.customer
     .update(body, {}, headers)
     .then(({ customer }) => customer)
-    .catch(medusaError)
+    .catch(handleMedusaError)
 
   const cacheTag = await getCacheTag("customers")
   revalidateTag(cacheTag)
